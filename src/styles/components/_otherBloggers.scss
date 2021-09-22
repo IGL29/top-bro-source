@@ -1,0 +1,89 @@
+.other-bloggers {
+  margin-bottom: 100px;
+
+  &__title {
+    margin-bottom: 52px;
+  }
+}
+
+.swiper {
+  margin-bottom: 40px;
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-image: url("img/arrow.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    &-disabled {
+      z-index: -1;
+    }
+
+    &-next {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &-slide {
+    height: initial;
+  }
+
+  &-scrollbar {
+    position: relative;
+    width: 311px;
+    height: 2px;
+    background-color: $gray;
+
+    &-drag {
+      position: absolute;
+      left: 0;
+      width: 10px;
+      height: 4px;
+      cursor: pointer;
+      background-color: $mystic;
+    }
+  }
+}
+
+.blogger-link__wrap-description--swiper {
+  width: initial;
+}
+
+.subscribers--swiper-columns {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+}
+
+.subscribers__text--nowrap {
+  white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+  .blogger-link__wrap-description--swiper {
+    padding-top: 195px;
+  }
+}
+
+@media (max-width: 576px) {
+  .swiper-scrollbar {
+    width: 100%;
+    margin-right: 21px;
+  }
+
+  .swiper-button {
+    width: 45px;
+    height: 41px;
+
+    &-prev {
+      margin-right: 21px;
+    }
+  }
+}

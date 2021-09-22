@@ -1,0 +1,17 @@
+.error {
+  width: 310px;
+  margin: 0 auto;
+  padding: 7px;
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+
+  &__text {
+    margin-top: 0;
+  }
+
+  &__button {
+    padding: 5px 10px;
+    border: none;
+  }
+}

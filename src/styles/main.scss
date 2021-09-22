@@ -1,0 +1,21 @@
+@import "vendor";
+@import "variables";
+@import "fonts";
+@import "mixins";
+@import "templates";
+@import "settings";
+@import "simplebar";
+
+@import "components/header";
+
+@import "components/breadCrumbs";
+@import "components/blogersSection";
+@import "components/error";
+@import "components/sorting";
+
+
+@import "components/aboutBlogger";
+@import "components/recentVideos";
+@import "components/otherBloggers";
+
+@import "components/footer";

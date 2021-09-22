@@ -1,0 +1,29 @@
+.simplebar-track.simplebar-vertical {
+  width: 4px;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 2px;
+    height: 100%;
+    content: "";
+    background-color: $gray;
+  }
+}
+
+.simplebar-scrollbar {
+
+    &::before {
+    top: 0;
+    left: 0;
+    width: 4px;
+    background-color: $mystic;
+    border-radius: 5px;
+    opacity: 1;
+  }
+
+  &.simplebar-visible::before {
+    opacity: 1;
+  }
+}

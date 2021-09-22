@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Топ Бро</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="body" class="body">
+  @include("./partials/header.html")
+
+  <main class="main">
+    @include("./partials/blogger/breadCrumbs.html")
+    @include("./partials/blogger/aboutBlogger.html")
+    @include("./partials/blogger/recentVideos.html")
+    @include("./partials/blogger/otherBloggers.html")
+  </main>
+  @include("./partials/footer.html")
+
+  <script type="module" src="aboutPage.js"></script>
+</body>
+</html>

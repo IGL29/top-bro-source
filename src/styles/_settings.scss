@@ -1,0 +1,126 @@
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  background-color: $darkPink;
+  @include font-Montserrat(500);
+  color: $mystic;
+  font-size: 16px;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+.main {
+  flex: 1 1 auto;
+}
+
+.container {
+  max-width: 1424px;
+  margin: 0 auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+}
+
+.button {
+  color: $mystic;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.title {
+  margin-top: 0;
+  @include font-Montserrat(800);
+  font-size: 51px;
+  text-align: center;
+}
+
+.cursor {
+  $background-color: $orange;
+
+  position: absolute;
+  z-index: 500;
+  width: 20px;
+  height: 20px;
+  background-color: $background-color;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+
+  &__effect {
+    position: absolute;
+    width: 79px;
+    height: 79px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border: 2px solid $background-color;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  &--pointer {
+    & .cursor__effect {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.no-cursor {
+  cursor: none;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding-right: 25px;
+    padding-left: 25px;
+  }
+
+  .cursor {
+    display: none;
+  }
+
+  .body {
+    cursor: initial;
+  }
+
+  .no-cursor {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 41px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}
