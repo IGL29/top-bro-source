@@ -1,7 +1,6 @@
 const { src, dest, series, watch } = require('gulp');
 
 const webpackStream = require('webpack-stream');
-
 const vinylNamed = require('vinyl-named');
 const rename = require("gulp-rename");
 const htmlMin = require('gulp-htmlmin');
@@ -14,10 +13,13 @@ const sourceMaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const del = require('del');
 const plumber = require('gulp-plumber');
+const ttfconvertToWoff = require('gulp-ttf2woff');
+const ttfconvertToWoff2 = require('gulp-ttftowoff2');
 const gulpif = require('gulp-if');
 
-const isProd = false;
+let isProd = true;
 const isDev = !isProd;
+const isOnlineBrowserSync = true;
 
 const webpackConfig = {
   mode: isProd ? 'production' : 'development',
@@ -40,7 +42,7 @@ const webpackConfig = {
     extensions: ['.js', '.json'],
   },
 
-  devtool: 'source-map',
+  devtool: (isDev) ? 'source-map' : false,
 };
 
 const cleanAll = () => {
@@ -109,17 +111,22 @@ const img = () => {
     .pipe(gulpif(isDev, browserSync.stream()));
 };
 
-const fonts = () => {
-  return src('src/fonts/*')
-    .pipe(dest('dist/fonts'))
+const fonts = async () => {
+  series(ttfToWoff, ttfToWoff2)
 }
 
-const watcher = () => {
-  browserSync.init({
-    server: {
-      baseDir: "dist"
-    }
-  });
+const ttfToWoff = () => {
+  src('src/fonts/*')
+    .pipe(ttfconvertToWoff())
+    .pipe(dest('dist/fonts'))
+    .pipe(gulpif(isDev, browserSync.stream()));
+}
+
+const ttfToWoff2 = () => {
+  src('src/fonts/*')
+    .pipe(ttfconvertToWoff2())
+    .pipe(dest('dist/fonts'))
+    .pipe(gulpif(isDev, browserSync.stream()));
 }
 
 const js = () => {
@@ -131,18 +138,36 @@ const js = () => {
     .pipe(gulpif(isDev, browserSync.stream()));
 }
 
-watch('src/**/*.html', html);
-watch('src/styles/**/*.scss', css);
-watch('src/scripts/**/*', js);
-watch('src/img/**/*', img);
+const watcher = () => {
+  browserSync.init({
+    server: {
+      baseDir: "dist"
+    },
+    online: isOnlineBrowserSync
+  });
+}
 
-exports.html = series(cleanHTML, html);
-exports.css = series(cleanCss, css);
-exports.img = series(cleanImg, img);
+const test = (cb) => {
+  isProd = false;
+  cb(series(cleanAll, fonts, img, html, css, js, watcher));
+  console.log(isProd);
+}
+
+watch('src/**/*.html', series(cleanHTML, html));
+watch('src/styles/**/*.scss', series(cleanCss, css));
+watch('src/scripts/**/*', series(cleanJS, js));
+watch('src/img/**/*', series(cleanImg, img));
+
+exports.test = test;
+
+exports.html = html;
+exports.css = css;
+exports.img = img;
 exports.fonts = fonts;
+exports.js = js;
 exports.clean = cleanAll;
-exports.js = series(cleanJS, js);
 
-exports.watcher = watcher;
+exports.watch = watcher;
 
 exports.default = series(cleanAll, fonts, img, html, css, js, watcher);
+

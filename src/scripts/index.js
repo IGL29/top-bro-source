@@ -1,6 +1,6 @@
 import shared from './modules/shared.js';
 import loadingCards from './modules/loadingCards.js';
-import Select from './modules/select.js';
+import Select from './modules/Select.js';
 
 const bodyElement = document.getElementById('body');
 const selectDirection = new Select({ selectId: 'select-direction', bodyElement });

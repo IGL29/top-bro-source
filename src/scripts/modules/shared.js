@@ -1,7 +1,7 @@
 import BurgerMenu from './showBurgerMenu.js';
-import setCursor from './setCursor.js';
+import './customCursor.js';
 
-function shared() {
+export default function shared() {
 
   const bodyElement = document.getElementById('body');
   const burgerButtonElement = document.getElementById('burger-btn');
@@ -20,17 +20,4 @@ function shared() {
   });
 
   burgerMenu.createMenu();
-
-  try {
-    setCursor({ parentElement: bodyElement });
-  } catch (err) {
-    const cursorDisabledElements = document.getElementsByClassName('.no-cursor');
-    for (element of cursorDisabledElements) {
-      element.classList.remove('no-cursor');
-    }
-    bodyElement.style.cursor = 'initial';
-    throw new Error(err);
-  }
 }
-
-export default shared;

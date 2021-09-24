@@ -1,4 +1,4 @@
-import setCursor from './setCursor.js';
+import customCursor from './customCursor.js';
 import templateCardBlogger from "./templates/templateCardBlogger";
 
 export default function getCardsHtmlElement(bloggersData) {
@@ -9,14 +9,14 @@ export default function getCardsHtmlElement(bloggersData) {
     const htmlElement = new DOMParser().parseFromString(templateCard, "text/html");
     const cardHtmlElement = htmlElement.querySelector('.bloger-item-js');
 
-    try {
-      setCursor({ parentElement: cardHtmlElement });
-    } catch (err) {
-      debugger
-      const cursorDisabledElement = cardHtmlElement.querySelector('.no-cursor');
-      cursorDisabledElement.classList.remove('no-cursor');
-      document.body.style.cursor = 'initial';
-    }
+    // try {
+      customCursor.setCursorPointer(cardHtmlElement);
+    // } catch (err) {
+    //   debugger
+    //   const cursorDisabledElement = cardHtmlElement.querySelector('.no-cursor');
+    //   cursorDisabledElement.classList.remove('no-cursor');
+    //   document.body.style.cursor = 'initial';
+    // }
 
     cardElements.push(cardHtmlElement);
   }
